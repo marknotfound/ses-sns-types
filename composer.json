@@ -1,0 +1,19 @@
+{
+    "name": "markdunphy/ses-sns-types",
+    "description": "Convert SES -> SNS notification payloads to PHP objects",
+    "license": "MIT",
+    "minimum-stability": "stable",
+    "prefer-dist": true,
+    "config": {
+        "use-include-path": true,
+        "bin-dir": "bin"
+    },
+    "require-dev": {
+        "phpspec/phpspec": "^3.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "markdunphy\\SesSnsTypes\\": "src/"
+        }
+    }
+}
