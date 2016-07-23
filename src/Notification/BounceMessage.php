@@ -2,7 +2,7 @@
 
 namespace markdunphy\SesSnsTypes\Notification;
 
-use markdunphy\SesSnsTypes\Entity;
+use markdunphy\SesSnsTypes\Entity\BouncedRecipient;
 
 class BounceMessage extends MessageTypeAbstract {
 
@@ -33,7 +33,7 @@ class BounceMessage extends MessageTypeAbstract {
   public function getBouncedRecipients() {
 
     $map = (function ($recipient) {
-      return new Entity\BouncedRecipient($recipient);
+      return new BouncedRecipient($recipient);
     });
 
     return array_map($map, $this->payload['bounce']['bouncedRecipients']);

@@ -2,15 +2,21 @@
 
 namespace markdunphy\SesSnsTypes\Notification;
 
+use markdunphy\SesSnsTypes\Entity\ComplainedRecipient;
+
 class ComplaintMessage extends MessageTypeAbstract {
 
   /**
    * @link http://docs.aws.amazon.com/ses/latest/DeveloperGuide/notification-contents.html#complained-recipients
-   * @return array
+   * @return ComplainedRecipient[]
    */
   public function getComplainedRecipients() {
 
-    return $this->payload['complaint']['complainedRecipients'];
+    $map = (function ($recipient) {
+      return new ComplainedRecipient($recipient);
+    });
+
+    return array_map($map, $this->payload['complaint']['complainedRecipients']);
 
   }
 

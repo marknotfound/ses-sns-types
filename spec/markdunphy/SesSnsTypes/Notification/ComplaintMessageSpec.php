@@ -3,6 +3,7 @@
 namespace spec\markdunphy\SesSnsTypes\Notification;
 
 use markdunphy\SesSnsTypes\Notification\ComplaintMessage;
+use markdunphy\SesSnsTypes\Entity\ComplainedRecipient;
 use Prophecy\Argument;
 use spec\markdunphy\SesSnsTypes\ObjectBehavior;
 
@@ -41,7 +42,7 @@ class ComplaintMessageSpec extends ObjectBehavior {
 
   public function it_returns_complained_recipients_with_getter() {
 
-    $this->getComplainedRecipients()->shouldReturn(static::PAYLOAD['complaint']['complainedRecipients']);
+    $this->getComplainedRecipients()->shouldReturnArrayOf(ComplainedRecipient::class);
 
   }
 
