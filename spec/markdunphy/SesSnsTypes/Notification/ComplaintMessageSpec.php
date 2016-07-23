@@ -2,11 +2,11 @@
 
 namespace spec\markdunphy\SesSnsTypes\Notification;
 
-use markdunphy\SesSnsTypes\Notification\ComplaintType;
-use PhpSpec\ObjectBehavior;
+use markdunphy\SesSnsTypes\Notification\ComplaintMessage;
 use Prophecy\Argument;
+use spec\markdunphy\SesSnsTypes\ObjectBehavior;
 
-class ComplaintTypeSpec extends ObjectBehavior {
+class ComplaintMessageSpec extends ObjectBehavior {
 
   const PAYLOAD = [
     'notificationType' => 'Complaint',
@@ -29,37 +29,36 @@ class ComplaintTypeSpec extends ObjectBehavior {
     'complaint'        => [],
   ];
 
+  public function let() {
+    $this->beConstructedWith(static::PAYLOAD);
+  }
+
   public function it_is_initializable() {
 
-    $this->beConstructedWith(static::PAYLOAD);
-    $this->shouldHaveType(ComplaintType::class);
+    $this->shouldHaveType(ComplaintMessage::class);
 
   }
 
   public function it_returns_complained_recipients_with_getter() {
 
-    $this->beConstructedWith(static::PAYLOAD);
     $this->getComplainedRecipients()->shouldReturn(static::PAYLOAD['complaint']['complainedRecipients']);
 
   }
 
   public function it_returns_complaint_timestamp_with_getter() {
 
-    $this->beConstructedWith(static::PAYLOAD);
     $this->getComplaintTimestamp()->shouldReturn(static::PAYLOAD['complaint']['timestamp']);
 
   }
 
   public function it_returns_feedback_id_with_getter() {
 
-    $this->beConstructedWith(static::PAYLOAD);
     $this->getFeedBackId()->shouldReturn(static::PAYLOAD['complaint']['feedbackId']);
 
   }
 
   public function it_returns_user_agent_with_getter() {
 
-    $this->beConstructedWith(static::PAYLOAD);
     $this->getUserAgent()->shouldReturn(static::PAYLOAD['complaint']['userAgent']);
 
   }
@@ -73,7 +72,6 @@ class ComplaintTypeSpec extends ObjectBehavior {
 
   public function it_returns_complaint_feedback_with_getter() {
 
-    $this->beConstructedWith(static::PAYLOAD);
     $this->getComplaintFeedbackType()->shouldReturn(static::PAYLOAD['complaint']['complaintFeedbackType']);
 
   }
@@ -87,7 +85,6 @@ class ComplaintTypeSpec extends ObjectBehavior {
 
   public function it_returns_arrival_date_with_getter() {
 
-    $this->beConstructedWith(static::PAYLOAD);
     $this->getArrivalDate()->shouldReturn(static::PAYLOAD['complaint']['arrivalDate']);
 
   }

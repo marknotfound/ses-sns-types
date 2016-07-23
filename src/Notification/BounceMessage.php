@@ -2,13 +2,15 @@
 
 namespace markdunphy\SesSnsTypes\Notification;
 
-class BounceType extends TypeAbstract {
+use markdunphy\SesSnsTypes\Entity;
+
+class BounceMessage extends MessageTypeAbstract {
 
   /**
    * @link http://docs.aws.amazon.com/ses/latest/DeveloperGuide/notification-contents.html#bounce-types
    * @return string
    */
-  public function getBounceType() {
+  public function getBounceMessage() {
 
     return $this->payload['bounce']['bounceType'];
 
@@ -26,11 +28,15 @@ class BounceType extends TypeAbstract {
 
   /**
    * @link http://docs.aws.amazon.com/ses/latest/DeveloperGuide/notification-contents.html#bounced-recipients
-   * @return array
+   * @return BouncedRecipient[]
    */
   public function getBouncedRecipients() {
 
-    return $this->payload['bounce']['bouncedRecipients'];
+    $map = (function ($recipient) {
+      return new Entity\BouncedRecipient($recipient);
+    });
+
+    return array_map($map, $this->payload['bounce']['bouncedRecipients']);
 
   }
 

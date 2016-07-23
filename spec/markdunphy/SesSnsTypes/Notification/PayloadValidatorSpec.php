@@ -3,8 +3,8 @@
 namespace spec\markdunphy\SesSnsTypes\Notification;
 
 use markdunphy\SesSnsTypes\Notification\PayloadValidator;
-use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use spec\markdunphy\SesSnsTypes\ObjectBehavior;
 
 class PayloadValidatorSpec extends ObjectBehavior {
 

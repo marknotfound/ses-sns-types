@@ -2,11 +2,11 @@
 
 namespace spec\markdunphy\SesSnsTypes\Notification;
 
-use markdunphy\SesSnsTypes\Notification\DeliveryType;
-use PhpSpec\ObjectBehavior;
+use markdunphy\SesSnsTypes\Notification\DeliveryMessage;
+use spec\markdunphy\SesSnsTypes\ObjectBehavior;
 use Prophecy\Argument;
 
-class DeliveryTypeSpec extends ObjectBehavior {
+class DeliveryMessageSpec extends ObjectBehavior {
 
   const PAYLOAD = [
     'notificationType' => 'Delivery',
@@ -19,44 +19,44 @@ class DeliveryTypeSpec extends ObjectBehavior {
     ],
   ];
 
-  public function it_is_initializable() {
+  public function let() {
 
     $this->beConstructedWith(static::PAYLOAD);
-    $this->shouldHaveType(DeliveryType::class);
+    
+  }
+
+  public function it_is_initializable() {
+
+    $this->shouldHaveType(DeliveryMessage::class);
 
   }
 
   public function it_returns_delivery_timestamp_with_getter() {
 
-    $this->beConstructedWith(static::PAYLOAD);
     $this->getDeliveryTimestamp()->shouldReturn(static::PAYLOAD['delivery']['timestamp']);
 
   }
 
   public function it_returns_processing_time_in_milliseconds_with_getter() {
 
-    $this->beConstructedWith(static::PAYLOAD);
     $this->getProcessingTimeInMilliseconds()->shouldReturn(static::PAYLOAD['delivery']['processingTimeInMillis']);
 
   }
 
   public function it_returns_recipients_with_getter() {
 
-    $this->beConstructedWith(static::PAYLOAD);
     $this->getRecipients()->shouldReturn(static::PAYLOAD['delivery']['recipients']);
 
   }
 
   public function it_returns_smtp_response_with_getter() {
 
-    $this->beConstructedWith(static::PAYLOAD);
     $this->getSmtpResponse()->shouldReturn(static::PAYLOAD['delivery']['smtpResponse']);
 
   }
 
   public function it_returns_reporting_mta_with_getter() {
 
-    $this->beConstructedWith(static::PAYLOAD);
     $this->getReportingMTA()->shouldReturn(static::PAYLOAD['delivery']['reportingMTA']);
 
   }

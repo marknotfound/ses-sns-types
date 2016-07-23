@@ -3,22 +3,22 @@
 namespace spec\markdunphy\SesSnsTypes\Notification;
 
 use markdunphy\SesSnsTypes\Exception;
-use markdunphy\SesSnsTypes\Notification\TypeFactory;
-use markdunphy\SesSnsTypes\Notification\TypeInterface;
+use markdunphy\SesSnsTypes\Notification\BounceMessage;
+use markdunphy\SesSnsTypes\Notification\ComplaintMessage;
+use markdunphy\SesSnsTypes\Notification\DeliveryMessage;
+use markdunphy\SesSnsTypes\Notification\MessageTypeFactory;
+use markdunphy\SesSnsTypes\Notification\MessageTypeInterface;
 use markdunphy\SesSnsTypes\Notification\PayloadValidator;
-use markdunphy\SesSnsTypes\Notification\BounceType;
-use markdunphy\SesSnsTypes\Notification\ComplaintType;
-use markdunphy\SesSnsTypes\Notification\DeliveryType;
-use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use spec\markdunphy\SesSnsTypes\ObjectBehavior;
 
-class TypeFactorySpec extends ObjectBehavior {
+class MessageTypeFactorySpec extends ObjectBehavior {
 
   const EXAMPLES_DIR = __DIR__.'/../../../../notification-examples';
 
   public function it_is_initializable() {
 
-    $this->shouldHaveType(TypeFactory::class);
+    $this->shouldHaveType(MessageTypeFactory::class);
 
   }
 
@@ -42,7 +42,7 @@ class TypeFactorySpec extends ObjectBehavior {
 
     $payload = require(static::EXAMPLES_DIR.'/delivery.php');
 
-    $this->create($payload)->shouldReturnAnInstanceOf(TypeInterface::class);
+    $this->create($payload)->shouldReturnAnInstanceOf(MessageTypeInterface::class);
 
   }
 
@@ -50,31 +50,31 @@ class TypeFactorySpec extends ObjectBehavior {
 
     $payload = json_decode( require(static::EXAMPLES_DIR.'/delivery.php'), true );
 
-    $this->create($payload)->shouldReturnAnInstanceOf(TypeInterface::class);
+    $this->create($payload)->shouldReturnAnInstanceOf(MessageTypeInterface::class);
 
   }
 
-  public function it_should_return_BounceType_when_given_bounce_notification_payload() {
+  public function it_should_return_BounceMessage_when_given_bounce_notification_payload() {
 
     $payload = json_decode( require(static::EXAMPLES_DIR.'/bounce-with-dsn.php'), true );
 
-    $this->create($payload)->shouldReturnAnInstanceOf(BounceType::class);
+    $this->create($payload)->shouldReturnAnInstanceOf(BounceMessage::class);
 
   }
 
-  public function it_should_return_DeliveryType_when_given_delivery_notification_payload() {
+  public function it_should_return_DeliveryMessage_when_given_delivery_notification_payload() {
 
     $payload = json_decode( require(static::EXAMPLES_DIR.'/delivery.php'), true );
 
-    $this->create($payload)->shouldReturnAnInstanceOf(DeliveryType::class);
+    $this->create($payload)->shouldReturnAnInstanceOf(DeliveryMessage::class);
 
   }
 
-  public function it_should_return_ComplaintType_when_given_complaint_notification_payload() {
+  public function it_should_return_ComplaintMessage_when_given_complaint_notification_payload() {
 
     $payload = json_decode( require(static::EXAMPLES_DIR.'/complaint-with-feedback-report.php'), true );
 
-    $this->create($payload)->shouldReturnAnInstanceOf(ComplaintType::class);
+    $this->create($payload)->shouldReturnAnInstanceOf(ComplaintMessage::class);
 
   }
 

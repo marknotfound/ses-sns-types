@@ -2,7 +2,7 @@
 
 namespace markdunphy\SesSnsTypes\Notification;
 
-class DeliveryType extends TypeAbstract {
+class DeliveryMessage extends MessageTypeAbstract {
 
   /**
    * @return string

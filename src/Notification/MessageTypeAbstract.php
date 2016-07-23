@@ -2,7 +2,7 @@
 
 namespace markdunphy\SesSnsTypes\Notification;
 
-abstract class TypeAbstract implements TypeInterface {
+abstract class MessageTypeAbstract implements MessageTypeInterface {
 
   /**
    * @var array

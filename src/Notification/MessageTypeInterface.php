@@ -2,7 +2,7 @@
 
 namespace markdunphy\SesSnsTypes\Notification;
 
-interface TypeInterface {
+interface MessageTypeInterface {
 
   /**
    * @return boolean

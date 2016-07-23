@@ -4,12 +4,12 @@ namespace markdunphy\SesSnsTypes\Notification;
 
 use markdunphy\SesSnsTypes\Exception;
 
-class TypeFactory {
+class MessageTypeFactory {
 
   const TYPE_CLASSES_BY_STRING = [
-    'bounce' => BounceType::class,
-    'complaint' => ComplaintType::class,
-    'delivery' => DeliveryType::class,
+    'bounce' => BounceMessage::class,
+    'complaint' => ComplaintMessage::class,
+    'delivery' => DeliveryMessage::class,
   ];
 
   /**
@@ -20,7 +20,7 @@ class TypeFactory {
   /**
    * @param string|array $payload json string or array of SNS payload data
    *
-   * @return TypeInterface
+   * @return MessageTypeInterface
    */
   public function create($payload) {
 
@@ -29,7 +29,7 @@ class TypeFactory {
     }
 
     if (!is_array($payload)) {
-      throw new Exception\InvalidTypeException('Argument 1 for NotificationTypeFactory::create must be valid JSON string or array');
+      throw new Exception\InvalidTypeException('Argument 1 for NotificationMessageTypeFactory::create must be valid JSON string or array');
     }
 
     if (!PayloadValidator::isValid($payload)) {

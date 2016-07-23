@@ -2,7 +2,7 @@
 
 namespace markdunphy\SesSnsTypes\Notification;
 
-class ComplaintType extends TypeAbstract {
+class ComplaintMessage extends MessageTypeAbstract {
 
   /**
    * @link http://docs.aws.amazon.com/ses/latest/DeveloperGuide/notification-contents.html#complained-recipients

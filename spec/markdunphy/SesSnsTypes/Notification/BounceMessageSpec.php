@@ -2,11 +2,12 @@
 
 namespace spec\markdunphy\SesSnsTypes\Notification;
 
-use markdunphy\SesSnsTypes\Notification\BounceType;
-use PhpSpec\ObjectBehavior;
+use markdunphy\SesSnsTypes\Entity;
+use markdunphy\SesSnsTypes\Notification\BounceMessage;
 use Prophecy\Argument;
+use spec\markdunphy\SesSnsTypes\ObjectBehavior;
 
-class BounceTypeSpec extends ObjectBehavior {
+class BounceMessageSpec extends ObjectBehavior {
 
   const PAYLOAD = [
     'notificationType' => 'Bounce',
@@ -27,55 +28,48 @@ class BounceTypeSpec extends ObjectBehavior {
     ],
   ];
 
-  public function it_is_initializable() {
+  public function let() {
 
     $this->beConstructedWith(static::PAYLOAD);
-    $this->shouldHaveType(BounceType::class);
+
+  }
+
+  public function it_is_initializable() {
+
+    $this->shouldHaveType(BounceMessage::class);
 
   }
 
   public function it_returns_bounce_type_with_getter() {
-
-    $this->beConstructedWith(static::PAYLOAD);
-    $this->getBounceType()->shouldReturn(static::PAYLOAD['bounce']['bounceType']);
+    $this->getBounceMessage()->shouldReturn(static::PAYLOAD['bounce']['bounceType']);
 
   }
 
   public function it_returns_bounce_sub_type_with_getter() {
-
-    $this->beConstructedWith(static::PAYLOAD);
     $this->getBounceSubType()->shouldReturn(static::PAYLOAD['bounce']['bounceSubType']);
 
   }
 
   public function it_returns_recipients_with_getter() {
 
-
-    $this->beConstructedWith(static::PAYLOAD);
-    $this->getBouncedRecipients()->shouldReturn(static::PAYLOAD['bounce']['bouncedRecipients']);
+    $this->getBouncedRecipients()->shouldReturnArrayOf(Entity\BouncedRecipient::class);
 
   }
 
   public function it_returns_bounced_timestamp_with_getter() {
 
-
-    $this->beConstructedWith(static::PAYLOAD);
     $this->getBouncedTimestamp()->shouldReturn(static::PAYLOAD['bounce']['timestamp']);
 
   }
 
   public function it_returns_feedback_id_with_getter() {
 
-
-    $this->beConstructedWith(static::PAYLOAD);
     $this->getFeedbackId()->shouldReturn(static::PAYLOAD['bounce']['feedbackId']);
 
   }
 
   public function it_returns_reporting_mta_with_getter() {
 
-
-    $this->beConstructedWith(static::PAYLOAD);
     $this->getReportingMTA()->shouldReturn(static::PAYLOAD['bounce']['reportingMTA']);
 
   }
