@@ -4,6 +4,10 @@ namespace markdunphy\SesSnsTypes\Notification;
 
 abstract class MessageTypeAbstract implements MessageTypeInterface {
 
+  const NOTIFICATION_DELIVERY = 'delivery';
+  const NOTIFICATION_COMPLAINT = 'complaint';
+  const NOTIFICATION_BOUNCE = 'bounce';
+
   /**
    * @var array
    */
@@ -15,6 +19,33 @@ abstract class MessageTypeAbstract implements MessageTypeInterface {
   public function __construct( array $payload ) {
 
     $this->payload = $payload;
+
+  }
+
+  /**
+   * @return boolean
+   */
+  public function isDeliveryNotification() {
+
+    return ($this->getTypeString() === self::NOTIFICATION_DELIVERY);
+
+  }
+
+  /**
+   * @return boolean
+   */
+  public function isComplaintNotification() {
+
+    return ($this->getTypeString() === self::NOTIFICATION_COMPLAINT);
+
+  }
+
+  /**
+   * @return boolean
+   */
+  public function isBounceNotification() {
+
+    return ($this->getTypeString() === self::NOTIFICATION_BOUNCE);
 
   }
 
