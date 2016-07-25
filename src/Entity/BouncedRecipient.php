@@ -2,7 +2,7 @@
 
 namespace markdunphy\SesSnsTypes\Entity;
 
-class BouncedRecipient {
+class BouncedRecipient implements RecipientInterface {
 
   /**
    * @var array
@@ -21,7 +21,7 @@ class BouncedRecipient {
   /**
    * @return string
    */
-  public function getEmailAddress() { 
+  public function getEmailAddress() {
 
     return $this->data['emailAddress'];
 
