@@ -6,6 +6,10 @@ use markdunphy\SesSnsTypes\Entity\BouncedRecipient;
 
 class BounceMessage extends MessageTypeAbstract {
 
+  const TYPE_UNDETERMINED = 'Undetermined';
+  const TYPE_PERMANENT = 'Permanent';
+  const TYPE_TRANSIENT = 'Transient';
+
   /**
    * @link http://docs.aws.amazon.com/ses/latest/DeveloperGuide/notification-contents.html#bounce-types
    * @return string
@@ -65,6 +69,33 @@ class BounceMessage extends MessageTypeAbstract {
 
     return $this->getValueOrNull('reportingMTA');
 
-  } // getReportingMTA
+  }
+
+  /**
+   * @return boolean
+   */
+  public function isHardBounce() {
+
+    return ($this->getBounceMessage() === static::TYPE_PERMANENT);
+
+  }
+
+  /**
+   * @return boolean
+   */
+  public function isSoftBounce() {
+
+    return ($this->getBounceMessage() === static::TYPE_TRANSIENT);
+
+  }
+
+  /**
+   * @return boolean
+   */
+  public function isUndeterminedBounce() {
+
+    return ($this->getBounceMessage() === static::TYPE_UNDETERMINED);
+
+  }
 
 }

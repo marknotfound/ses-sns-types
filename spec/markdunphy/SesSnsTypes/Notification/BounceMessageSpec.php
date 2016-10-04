@@ -41,11 +41,13 @@ class BounceMessageSpec extends ObjectBehavior {
   }
 
   public function it_returns_bounce_type_with_getter() {
+
     $this->getBounceMessage()->shouldReturn(static::PAYLOAD['bounce']['bounceType']);
 
   }
 
   public function it_returns_bounce_sub_type_with_getter() {
+
     $this->getBounceSubType()->shouldReturn(static::PAYLOAD['bounce']['bounceSubType']);
 
   }
@@ -83,6 +85,141 @@ class BounceMessageSpec extends ObjectBehavior {
 
     $this->beConstructedWith($payload);
     $this->getReportingMTA()->shouldReturn(null);
+
+  }
+
+  public function it_returns_true_when_bounce_type_is_transient() {
+
+    $payload = [
+      'notificationType' => 'bounce',
+      'bounce' => [
+        'bounceType' => BounceMessage::TYPE_TRANSIENT
+      ]
+    ];
+
+    $this->beConstructedWith($payload);
+
+    $this->isSoftBounce()->shouldReturn(true);
+
+  }
+
+  public function it_returns_false_when_bounce_type_is_undetermined_is_soft_bounce() {
+
+    $payload = [
+      'notificationType' => 'bounce',
+      'bounce' => [
+        'bounceType' => BounceMessage::TYPE_UNDETERMINED
+      ]
+    ];
+
+    $this->beConstructedWith($payload);
+
+    $this->isSoftBounce()->shouldReturn(false);
+
+  }
+
+  public function it_returns_false_when_bounce_type_is_permanent_is_soft_bounce() {
+
+    $payload = [
+      'notificationType' => 'bounce',
+      'bounce' => [
+        'bounceType' => BounceMessage::TYPE_PERMANENT
+      ]
+    ];
+
+    $this->beConstructedWith($payload);
+
+    $this->isSoftBounce()->shouldReturn(false);
+
+  }
+
+  public function it_returns_true_when_bounce_type_is_permanent() {
+
+    $payload = [
+      'notificationType' => 'bounce',
+      'bounce' => [
+        'bounceType' => BounceMessage::TYPE_PERMANENT
+      ]
+    ];
+
+    $this->beConstructedWith($payload);
+
+    $this->isHardBounce()->shouldReturn(true);
+
+  }
+
+  public function it_returns_false_when_bounce_type_is_undetermined_is_hard_bounce() {
+
+    $payload = [
+      'notificationType' => 'bounce',
+      'bounce' => [
+        'bounceType' => BounceMessage::TYPE_UNDETERMINED
+      ]
+    ];
+
+    $this->beConstructedWith($payload);
+
+    $this->isHardBounce()->shouldReturn(false);
+
+  }
+
+  public function it_returns_false_when_bounce_type_is_transient_is_hard_bounce() {
+
+    $payload = [
+      'notificationType' => 'bounce',
+      'bounce' => [
+        'bounceType' => BounceMessage::TYPE_TRANSIENT
+      ]
+    ];
+
+    $this->beConstructedWith($payload);
+
+    $this->isHardBounce()->shouldReturn(false);
+
+  }
+
+  public function it_returns_true_when_bounce_type_is_undetermined() {
+
+    $payload = [
+      'notificationType' => 'bounce',
+      'bounce' => [
+        'bounceType' => BounceMessage::TYPE_UNDETERMINED
+      ]
+    ];
+
+    $this->beConstructedWith($payload);
+
+    $this->isUndeterminedBounce()->shouldReturn(true);
+
+  }
+
+  public function it_returns_false_when_bounce_type_is_permanent_is_undetermined_bounce() {
+
+    $payload = [
+      'notificationType' => 'bounce',
+      'bounce' => [
+        'bounceType' => BounceMessage::TYPE_PERMANENT
+      ]
+    ];
+
+    $this->beConstructedWith($payload);
+
+    $this->isUndeterminedBounce()->shouldReturn(false);
+
+  }
+
+  public function it_returns_false_when_bounce_type_is_transient_is_undetermined_bounce() {
+
+    $payload = [
+      'notificationType' => 'bounce',
+      'bounce' => [
+        'bounceType' => BounceMessage::TYPE_TRANSIENT
+      ]
+    ];
+
+    $this->beConstructedWith($payload);
+
+    $this->isUndeterminedBounce()->shouldReturn(false);
 
   }
 
